@@ -1,0 +1,26 @@
+extends ../layout/index
+
+block content
+  div(class="py-10")
+    h1(class="text-4x1 my-10 font-extrabold text-center") Real
+      span(class="font-normal text-orange-600") Estate
+    h2(class="text-center text-2x1 font-extrabold")= page
+    if welcomeMessage
+      div(class="bg-green-500 text-white py-2 px-4 rounded-md text-center mb-4" id="welcomeMessage")
+        p(class="font-bold")= welcomeMessage
+
+    a(href="/property/create" class="rounded-lg py-2 px-10 bg-orange-500 text-white text-center transition-all ease-in-out duration-300 transform hover:scale-95 uppercase my-5 hover:bg-orange-700 text-sm font-bold inline-block md:w-auto") Publish Property
+
+  script.
+    document.addEventListener("DOMContentLoaded", function() {
+      const welcomeMessage = document.getElementById('welcomeMessage');
+      if (welcomeMessage) {
+        setTimeout(() => {
+          welcomeMessage.style.transition = 'opacity 0.5s ease-in-out';
+          welcomeMessage.style.opacity = '0';
+          setTimeout(() => {
+            welcomeMessage.style.display = 'none';
+          }, 500);
+        }, 5000); // Espera 5 segundos antes de ocultar
+      }
+    });

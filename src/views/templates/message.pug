@@ -1,0 +1,9 @@
+extends ../layout/index
+
+block content
+  div.py-5.mt-8.mx-auto.max-w-md.w-65
+    h1.text-4xl.my-10.font-extrabold.text-center(style="color: #DD6E42;") Real
+      span.font-normal Real State
+    h2.text-center.text-2xl.font-extrabold= page
+    p.text-xl.font-bold.text-center.my-10= message
+    a(href="/login" class="block text-center bg-blue-500 text-white font-bold py-2 px-4 rounded-md cursor-pointer transition-all ease-in-out duration-300 transform hover:scale-105 hover:bg-blue-700 mt-4") Back to Login
