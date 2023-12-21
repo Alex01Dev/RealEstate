@@ -20,7 +20,7 @@ router.get("/confirm/:token", confirmAccount);
 router.post("/login/recovery", resetPassword);
 
 // Change Password
-router.get("/login/change-password/:tokenPassword", changePassword);
+router.get("/login/passwordChange/:tokenPassword", changePassword);
 router.post("/login/update-password/:tokenPassword", updatePassword);
 
 //Authenticate

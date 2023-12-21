@@ -1,32 +1,34 @@
+import dotenv from "dotenv";
+dotenv.config({path:"src/.env"})
+import jwt from "jsonwebtoken";
+import User from '../models/User.js'
 
-const protectRoute = async (request,response,next) =>{
 
-    console.log("Hola desde Middlewares");
-    
-    //protector de ruta
-    const {_token} = request.cookies;
+const protectRoute = async (req,res,next) =>{
+    console.log("Hola desde el middleware")
+    //Verificar la existencia de un token
+    const { _token } = req.cookies
     if(!_token){
-        return response.redirect('/login')
-
+        return res.redirect('/login')
     }
-    //TODO: Verificar el token
+    //Verificar el token 
     try {
-        const decodeJWT = jwt.verify(_token, process.env.JWT_HASHINSTRING)
-        console.log(decodeJWT);
-
-        
-
-        const loggedUser = User.findByPk(decodeJWT.userID);
+        const decodedJWT = jwt.verify(_token, process.env.JWT_HASHSTRING)
+        //console.log(decodedJWT)
+        const loggedUser = await User.findByPk(decodedJWT.userId)
         if(!loggedUser){
-            return response.redirect("/login")
+            //console.log("El usuario no existe")
+            return res.clearCookie("_token").redirect("/login")
+        }else{
+            req.User = loggedUser
+            
         }
-        
     } catch (error) {
-        return response.clearCookie("_token").redirect('/login');
+        return res.clearCookie("_token").redirect("/login")
     }
-    
-    next();
-
+    next()
 }
+
+
 
 export default protectRoute;
