@@ -1,0 +1,19 @@
+extends ../layout/index
+
+block styles
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.css")
+
+block content
+    .py-10
+        h1.text-4xl.my-10.font-extrabold.text-center.text-chocolateColor Real
+            span.font-medium.text-majorelle-blue.text-taupeColor Estate 
+        h2.text-center.text-2xl.font-extrabold.text-chocolateColor= page
+
+    div.bg-white.shadow-xl.py-8.px-4.rounded.mx-auto.rounded.mx-auto.max-w-4xl.my-10.space-y-8(class="md:px-10")
+        form(id="imageBox" action=`/property/create/loadImage/${propertyID}` class="space-y-8 dropzone border-dashed border-2 w-full min-h-96 h-auto rounded flex-col justify-center items-center" method="POST" enctype="multipart/form-data")
+        button(id="postImage" class="w-full py-3 px-3 bg-blue-600 text-white hover:bg-blue-800 hover:scale-105 hover:text-white rounded uppercase font-bold cursor-pointer text-center" type="button") Publish property
+
+            
+block scripts
+    script(src="https//cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js")
+    script(src="/js/imageBox.js")

@@ -1,6 +1,6 @@
 import { request, response } from "express";
 import { check, validationResult } from "express-validator";
-import { generateID, jwtToken } from "../lib/tokens.js";
+import { generatedID, jwtToken } from "../lib/tokens.js";
 import { emailRegister, emailResetPassword } from "../lib/emails.js";
 import cookieParser from "cookie-parser";
 import User from "../models/User.js";
@@ -35,14 +35,14 @@ const insertUser = async (request, response) => {
 
   if (resultValidation.isEmpty()) {
     const { name, email, password } = request.body;
-    const token = generateID();
+    const token = generatedID();
 
     console.log(`Attempting to insert user ${name}, with email: ${email}, password: ${password}, and token: ${token}`);
 
     const userExist = await User.findOne({ where: { email: email } });
     console.log(userExist);
     if (userExist && email) {
-      return response.render("auth/register.pug", {
+      return response.render("/register.pug", {
         page: `Creating New Account`,
         errors: [{ msg: `The User with: ${email} already exists` }],
 
